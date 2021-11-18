@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">findmeApplication</string>
+    <string name="id">이메일</string>
+    <string name="pwd">비밀번호</string>
+    <string name="Login">로그인</string>
+    <string name="Find_pwd">비밀번호찾기 </string>
+    <string name="Register">회원가입 </string>
+    <string name="Find_id">아이디찾기</string>
+    <string name="name">Find me</string>
+    <string name="regiester_string">회원가입</string>
+    <string name="autosave">로그인 자동저장</string>
+
+    <string name="guide">나를 찾아가는 과정</string>
+    <string name="guide02">시작해볼까요?</string>
+    <string name="guide03">먼저 이메일이 필요해요 :)</string>
+    <string name="email_guide">이메일을 입력하세요</string>
+    <string name="coti">계속하기</string>
+    <string name="check">확인</string>
+    <string name="user_name">사용할 이름이 필요해요.</string>
+    <string name="phone">핸드폰 번호가 필요해요.</string>
+    <string name="phone_guide">핸드폰 번호를 입력하세요.</string>
+    <string name="phone_send">조회하기 </string>
+
+    <string name="pass">비밀번호가 필요해요.</string>
+    <string name="guide_pwd">비밀번호를 입력하세요</string>
+    <string name="guide_pwd_conform">비밀번호를 한 번 더 입력하세요.</string>
+    <string name="write">write</string>
+    <string name="item">Item</string>
+
+</resources>
