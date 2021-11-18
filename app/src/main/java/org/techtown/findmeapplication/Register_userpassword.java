@@ -26,6 +26,7 @@ public class Register_userpassword extends AppCompatActivity {
         String name = extras.getString("name_string"); // 이름
         String phone = extras.getString("phone_string");//핸드폰 번호
         String email = extras.getString("email_string");//이메일
+        int questionID = 1;
 
         EditText password = (EditText) findViewById(R.id.editTextTextPassword);
         EditText passwordcheck = (EditText) findViewById(R.id.editTextTextPassword_conform);
@@ -40,7 +41,7 @@ public class Register_userpassword extends AppCompatActivity {
                String pwdcheck = passwordcheck.getText().toString();
                check(pwd,pwdcheck);
                if(check ==true){
-                   Register(new RegisterData(name,phone,email,pwd,1));
+                   Register(new RegisterData(name,phone,email,pwd,questionID));
                }
             }
         });

@@ -73,14 +73,13 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                 LoginResponse result = response.body();
                 int code = result.getCode();
-                if(result ==null){
-                    Toast.makeText(MainActivity.this, "에러", Toast.LENGTH_SHORT).show();
-                }
-                if(code ==204){
+                if(code ==200){
                     Intent intent = new Intent(getApplicationContext(),homeActivity.class);
                     int id = result.getUserId();
                     intent.putExtra("id",id);
                     startActivity(intent);
+                    Toast.makeText(MainActivity.this, result.getMessage(), Toast.LENGTH_SHORT).show();
+                }else{
                     Toast.makeText(MainActivity.this, result.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
@@ -94,4 +93,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+    //뒤로가기 맊기
+    @Override public void onBackPressed() {  }
+
 }

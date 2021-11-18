@@ -70,7 +70,7 @@ public class Register_UserPhone extends AppCompatActivity {
                 PhoneResponse result = response.body();
                 Toast.makeText(Register_UserPhone.this, result.getMessage(), Toast.LENGTH_SHORT).show();
             int code = result.getCode();
-            if(code ==204){
+            if(code ==200){
                 check =true;
             }
             }

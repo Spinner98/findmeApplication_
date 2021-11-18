@@ -17,7 +17,7 @@ public class RegisterData {
     @SerializedName("preQuestion")
     private int preQuestion;
 
-    public RegisterData(String userName,String userPhone, String userEmail, String userPwd,int preQuestion) {
+    public RegisterData(String userName, String userPhone, String userEmail, String userPwd, int preQuestion) {
         this.userName = userName;
         this.userPhone = userPhone;
         this.userEmail = userEmail;

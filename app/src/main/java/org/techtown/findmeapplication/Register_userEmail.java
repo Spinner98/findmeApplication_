@@ -32,13 +32,15 @@ public class Register_userEmail extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 checkEmail();
-                String email = mEmailView.getText().toString();
+                if(check ==true){
+                    String email = mEmailView.getText().toString();
 
                     Intent intent = new Intent(getApplicationContext(),Register_userpassword.class);
                     intent.putExtra("name_string",name);
                     intent.putExtra("phone_string",phone);
                     intent.putExtra("email_string",email);
                     startActivity(intent);
+                }
 
 
             }
@@ -47,17 +49,16 @@ public class Register_userEmail extends AppCompatActivity {
     private void checkEmail(){
         mEmailView.setError(null);
         String email = mEmailView.getText().toString();
-        boolean cancel =false;
         View focusView = null;
 
         if (email.isEmpty()) {
             mEmailView.setError("이메일을 입력해주세요.");
             focusView = mEmailView;
-            cancel = true;
+
         } else if (!isEmailValid(email)) {
             mEmailView.setError("@를 포함한 유효한 이메일을 입력해주세요.");
             focusView = mEmailView;
-            cancel = true;
+
         }else{
             checkEmail(new EmailData(email));
         }
@@ -72,10 +73,14 @@ public class Register_userEmail extends AppCompatActivity {
             @Override
             public void onResponse(Call<EmailResponse> call, Response<EmailResponse> response) {
                 EmailResponse result = response.body();
-                Toast.makeText(Register_userEmail.this, result.getMessage(), Toast.LENGTH_SHORT).show();
-                if(result.getCode()==204){
-                    check =true;
 
+                if(result.getCode()==200){
+                    check =true;
+                    Toast.makeText(Register_userEmail.this, result.getMessage(), Toast.LENGTH_SHORT).show();
+
+                }
+                else{
+                    Toast.makeText(Register_userEmail.this, result.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
 
