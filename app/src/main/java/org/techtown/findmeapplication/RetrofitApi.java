@@ -19,6 +19,9 @@ public interface RetrofitApi {
     Call<Register_question_Response> userRegisterQuestion(@Body Register_question_Data data); //등록
     @POST("user/diary_register")
     Call<insert_Diary_user_Response> userRegisterDairy(@Body Insert_Diary_user_Data data);//일기 내용 추가
-
+    @POST("user/question_check")
+    Call<questionCheckResponse> userQuestionCheck(@Body questionCheckData data);//버튼 활성화 인서트 판정
+    @POST("user/prequestionUp")
+    Call<prequestionUpdateResponse> userQuestionUp(@Body prequestionUpdateDate data);
 }
 

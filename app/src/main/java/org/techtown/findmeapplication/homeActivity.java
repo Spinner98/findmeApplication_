@@ -33,21 +33,32 @@ import com.google.gson.Gson;
 import org.w3c.dom.Text;
 
 import me.relex.circleindicator.CircleIndicator3;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class homeActivity extends FragmentActivity {
+
     private ViewPager2 mPager;
     private FragmentStateAdapter pagerAdapter;
     private int num_page = 2;
     public int number;
-    questionFragment fragment = new questionFragment(); // Fragment that you want to call
+    public static String date;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Intent intent = getIntent();
-        String question =intent.getStringExtra("question");
+        Intent dateIntent = getIntent();
         String url = intent.getStringExtra("url");
         String id = intent.getStringExtra("id");
-        String date = intent.getStringExtra("questiondate");
+        String date = intent.getStringExtra("questionDate");
+        System.out.println(date);
+
+
+        int number = Integer.parseInt(id);
+
+
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
@@ -88,6 +99,8 @@ public class homeActivity extends FragmentActivity {
         });
 
     }
+
+
     //뒤로가기 맊기
     @Override public void onBackPressed() {  }
 

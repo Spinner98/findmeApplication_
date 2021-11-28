@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     RetrofitApi service = RetrofitClient.getClient().create(RetrofitApi.class);
     public String question;
     public String url;
-    public String questiondate;
+    public String date;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
         TextView findId = (TextView)findViewById(R.id.Find_id);
         TextView findpwd = (TextView)findViewById(R.id.find_pwd);
         questionFragment q = new questionFragment();
-
 
 //회원가입
         Register.setOnClickListener(new View.OnClickListener() {
@@ -75,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
     //로그인 메인기능
+
     void startLogin(LoginData data){
         service.userLogin(data).enqueue(new Callback<LoginResponse>() {
             @Override
@@ -84,13 +84,12 @@ public class MainActivity extends AppCompatActivity {
                 if(code ==200){
                     Intent intent = new Intent(getApplicationContext(),homeActivity.class);
                     String id = result.getUserId();
+                    int number = Integer.parseInt(id);
                     question = result.getQuestion();
                     url = result.getUrl();
-                    questiondate = result.getQuestionCreate();
                     intent.putExtra("id",id);
                     intent.putExtra("question",question);
                     intent.putExtra("url",url);
-                    intent.putExtra("questiondate",questiondate);
                     startActivity(intent);
                     Toast.makeText(MainActivity.this, result.getMessage(), Toast.LENGTH_SHORT).show();
                 }else{
@@ -107,6 +106,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+
     //뒤로가기 맊기
     @Override public void onBackPressed() {  }
 

@@ -31,7 +31,7 @@ public class question_write extends AppCompatActivity {
         Intent intent = getIntent();
         String question =intent.getStringExtra("question");
         String id = intent.getStringExtra("id");
-
+        System.out.println(id);
 
         EditText Content_text = (EditText) findViewById(R.id.editTextTextMultiLine3);
         TextView questionText_write = (TextView) findViewById(R.id.question);
@@ -58,7 +58,7 @@ public class question_write extends AppCompatActivity {
                 }else{
                     int number = Integer.parseInt(id); //숫자로 변형된 id
                     RegisterContent_question(new Register_question_Data(number,question,Content,DateText)); //서버에 내용 보내기
-
+                    updateprequsetion(new prequestionUpdateDate(number));
                 }
 
 
@@ -82,6 +82,20 @@ public class question_write extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Register_question_Response> call, Throwable t) {
+                System.out.println("실패");
+            }
+        });
+    }
+    void updateprequsetion(prequestionUpdateDate data){
+        service.userQuestionUp(data).enqueue(new Callback<prequestionUpdateResponse>() {
+            @Override
+            public void onResponse(Call<prequestionUpdateResponse> call, Response<prequestionUpdateResponse> response) {
+                prequestionUpdateResponse result = response.body();
+                result.getMessage();
+            }
+
+            @Override
+            public void onFailure(Call<prequestionUpdateResponse> call, Throwable t) {
                 System.out.println("실패");
             }
         });
