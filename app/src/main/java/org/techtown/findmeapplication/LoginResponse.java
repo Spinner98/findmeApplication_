@@ -9,8 +9,17 @@ public class LoginResponse {
     @SerializedName("message")
     private String message;
 
-    @SerializedName("userId")
-    private int userId;
+    @SerializedName("id")
+    private String id;
+
+    @SerializedName("question")
+    private String question;
+
+    @SerializedName("url")
+    private String url;
+
+    @SerializedName("questionCreate")
+    private String questionCreate;
 
     public int getCode() {
         return code;
@@ -20,7 +29,10 @@ public class LoginResponse {
         return message;
     }
 
-    public int getUserId() {
-        return userId;
+    public String getUserId() {
+        return id;
     }
+    public String getQuestion() {return question;}
+    public String getUrl() {return url;}
+    public String getQuestionCreate(){return  questionCreate;}
 }

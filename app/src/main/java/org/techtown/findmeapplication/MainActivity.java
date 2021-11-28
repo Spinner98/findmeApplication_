@@ -1,6 +1,8 @@
 package org.techtown.findmeapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -19,6 +21,10 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
     RetrofitApi service = RetrofitClient.getClient().create(RetrofitApi.class);
+    public String question;
+    public String url;
+    public String questiondate;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
         CheckBox checkBox = (CheckBox) findViewById(R.id.checkBox);
         TextView findId = (TextView)findViewById(R.id.Find_id);
         TextView findpwd = (TextView)findViewById(R.id.find_pwd);
+        questionFragment q = new questionFragment();
+
 
 //회원가입
         Register.setOnClickListener(new View.OnClickListener() {
@@ -75,8 +83,14 @@ public class MainActivity extends AppCompatActivity {
                 int code = result.getCode();
                 if(code ==200){
                     Intent intent = new Intent(getApplicationContext(),homeActivity.class);
-                    int id = result.getUserId();
+                    String id = result.getUserId();
+                    question = result.getQuestion();
+                    url = result.getUrl();
+                    questiondate = result.getQuestionCreate();
                     intent.putExtra("id",id);
+                    intent.putExtra("question",question);
+                    intent.putExtra("url",url);
+                    intent.putExtra("questiondate",questiondate);
                     startActivity(intent);
                     Toast.makeText(MainActivity.this, result.getMessage(), Toast.LENGTH_SHORT).show();
                 }else{

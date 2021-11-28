@@ -4,57 +4,64 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.ViewCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.gson.Gson;
+
+import org.w3c.dom.Text;
 
 import me.relex.circleindicator.CircleIndicator3;
 
 
-public class homeActivity extends AppCompatActivity {
+public class homeActivity extends FragmentActivity {
     private ViewPager2 mPager;
     private FragmentStateAdapter pagerAdapter;
     private int num_page = 2;
-    private CircleIndicator3 mIndicator;
+    public int number;
+    questionFragment fragment = new questionFragment(); // Fragment that you want to call
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Intent intent = getIntent();
+        String question =intent.getStringExtra("question");
+        String url = intent.getStringExtra("url");
+        String id = intent.getStringExtra("id");
+        String date = intent.getStringExtra("questiondate");
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        ImageButton setting = (ImageButton) findViewById(R.id.setting);
-        Bundle extras = getIntent().getExtras();
 
-
-        //세팅버튼 활성화
-        setting.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),settingActivity.class);
-                startActivity(intent);
-            }
-        });
         //ViewPager2
         mPager = findViewById(R.id.viewpager);
-        //Adapter
-        pagerAdapter = new MyAdapter(this, num_page);
+//Adapter
+        pagerAdapter = new ViewPager2Adapter(this, num_page);
         mPager.setAdapter(pagerAdapter);
-        //Indicator
-        mIndicator = findViewById(R.id.indicator);
-        mIndicator.setViewPager(mPager);
-        mIndicator.createIndicators(num_page,0);
-        //ViewPager Setting
+//ViewPager Setting
         mPager.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
-        mPager.setCurrentItem(1000);
-        mPager.setOffscreenPageLimit(2);
+        mPager.setCurrentItem(1000); //시작 지점
+        mPager.setOffscreenPageLimit(2); //최대 이미지 수
+
         mPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -63,35 +70,25 @@ public class homeActivity extends AppCompatActivity {
                     mPager.setCurrentItem(position);
                 }
             }
-
             @Override
             public void onPageSelected(int position) {
                 super.onPageSelected(position);
-                mIndicator.animatePageSelected(position%num_page);
             }
-
         });
 
 
-        final float pageMargin= getResources().getDimensionPixelOffset(R.dimen.pageMargin);
-        final float pageOffset = getResources().getDimensionPixelOffset(R.dimen.offset);
-
-        mPager.setPageTransformer(new ViewPager2.PageTransformer() {
+        ImageButton setting = (ImageButton) findViewById(R.id.setting);
+        //세팅버튼 활성화
+        setting.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void transformPage(@NonNull View page, float position) {
-                float myOffset = position * -(2 * pageOffset + pageMargin);
-                if (mPager.getOrientation() == ViewPager2.ORIENTATION_HORIZONTAL) {
-                    if (ViewCompat.getLayoutDirection(mPager) == ViewCompat.LAYOUT_DIRECTION_RTL) {
-                        page.setTranslationX(-myOffset);
-                    } else {
-                        page.setTranslationX(myOffset);
-                    }
-                } else {
-                    page.setTranslationY(myOffset);
-                }
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), settingActivity.class);
+                startActivity(intent);
             }
         });
 
     }
+    //뒤로가기 맊기
+    @Override public void onBackPressed() {  }
 
 }
