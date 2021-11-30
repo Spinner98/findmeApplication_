@@ -18,7 +18,7 @@ public class Register_userEmail extends AppCompatActivity {
     private EditText mEmailView;
     private Button emailConti;
     public boolean check =false;
-    RetrofitApi service = RetrofitClient.getClient().create(RetrofitApi.class);
+    org.techtown.findmeapplication.RetrofitApi service = org.techtown.findmeapplication.RetrofitClient.getClient().create(org.techtown.findmeapplication.RetrofitApi.class);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,7 +60,7 @@ public class Register_userEmail extends AppCompatActivity {
             focusView = mEmailView;
 
         }else{
-            checkEmail(new EmailData(email));
+            checkEmail(new org.techtown.findmeapplication.EmailData(email));
         }
 
     }
@@ -68,11 +68,11 @@ public class Register_userEmail extends AppCompatActivity {
         return email.contains("@");
     }
 
-    public void checkEmail(EmailData data){
-        service.userEmail(data).enqueue(new Callback<EmailResponse>() {
+    public void checkEmail(org.techtown.findmeapplication.EmailData data){
+        service.userEmail(data).enqueue(new Callback<org.techtown.findmeapplication.EmailResponse>() {
             @Override
-            public void onResponse(Call<EmailResponse> call, Response<EmailResponse> response) {
-                EmailResponse result = response.body();
+            public void onResponse(Call<org.techtown.findmeapplication.EmailResponse> call, Response<org.techtown.findmeapplication.EmailResponse> response) {
+                org.techtown.findmeapplication.EmailResponse result = response.body();
 
                 if(result.getCode()==200){
                     check =true;
@@ -85,7 +85,7 @@ public class Register_userEmail extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<EmailResponse> call, Throwable t) {
+            public void onFailure(Call<org.techtown.findmeapplication.EmailResponse> call, Throwable t) {
                 Toast.makeText(Register_userEmail.this, "회원가입 에러 발생", Toast.LENGTH_SHORT).show();
                 Log.e("회원가입 에러 발생", t.getMessage());
                 t.printStackTrace(); // 에러 발생시 에러 발생 원인 단계별로 출력해줌

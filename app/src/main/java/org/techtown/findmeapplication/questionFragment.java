@@ -1,24 +1,19 @@
 package org.techtown.findmeapplication;
 
-import android.content.Context;
 import android.content.Intent;
 import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.squareup.picasso.Picasso;
-
-import org.w3c.dom.Text;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -37,7 +32,9 @@ public class questionFragment extends Fragment {
     public int number;
     public String DateText;
     public boolean buttonaction;
-    RetrofitApi service = RetrofitClient.getClient().create(RetrofitApi.class);
+    public boolean action;
+    public String hour;
+    org.techtown.findmeapplication.RetrofitApi service = org.techtown.findmeapplication.RetrofitClient.getClient().create(org.techtown.findmeapplication.RetrofitApi.class);
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +44,14 @@ public class questionFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        Bundle args = getActivity().getIntent().getExtras();
+        value= args.getString("question");
+        String url = args.getString("url");
+        id = args.getString("id");
+        number = Integer.parseInt(id);
+        System.out.println(hour);
+        questioncheck(new org.techtown.findmeapplication.questionCheckData(number,value));
+
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.question_fragment, container, false);
         queText = (TextView) rootView.findViewById(R.id.question_textview);
         ImageView image = (ImageView) rootView.findViewById(R.id.imageView2);
@@ -58,23 +63,15 @@ public class questionFragment extends Fragment {
         SimpleDateFormat yearFormat = new SimpleDateFormat("yyyy", Locale.getDefault());
         SimpleDateFormat dayFormat = new SimpleDateFormat("dd", Locale.getDefault());
         SimpleDateFormat monthFormat = new SimpleDateFormat("MM", Locale.getDefault());
+        SimpleDateFormat hourFormat = new SimpleDateFormat("HH", Locale.getDefault());
         String year = yearFormat.format(currentTime);
         String month = monthFormat.format(currentTime);
         String day = dayFormat.format(currentTime);
+        hour = hourFormat.format(currentTime);
         DateText = year+"년"+month+"월"+day+"일";
         Date.setText(year+" 년 "+ month+" 월 "+ day+" 일");
-
-
-        Bundle bundle = new Bundle();
-        Bundle args = getActivity().getIntent().getExtras();
-
-        value= args.getString("question");
-        String url = args.getString("url");
-        id = args.getString("id");
-        number = Integer.parseInt(id);
-
         Picasso.get().load(url).into(image);
-        questioncheck(new questionCheckData(number,value));
+
 
 
 
@@ -93,26 +90,43 @@ public class questionFragment extends Fragment {
 
         return rootView;
     }
-    void questioncheck(questionCheckData data){
+    void questioncheck(org.techtown.findmeapplication.questionCheckData data){
         service.userQuestionCheck(data).enqueue(new Callback<questionCheckResponse>() {
             @Override
             public void onResponse(Call<questionCheckResponse> call, Response<questionCheckResponse> response) {
                 questionCheckResponse result = response.body();
                 int Code = result.getCode();
                 String date = result.getQuestionDate();
+                System.out.println(date);
                 if(DateText.equals(date)==true){
                     queText.setText("자정 이후에 업데이트됩니다.");
-                    buttonaction =false;
+                    if(hour=="00"){
+                        updateprequsetion(new prequestionUpdateDate(number));
+                    }   buttonaction =false;
 
                 }else{
                     queText.setText(value);
                     buttonaction =true;
-                }
 
+                }
             }
             @Override
             public void onFailure(Call<questionCheckResponse> call, Throwable t) {
                 System.out.println("err");
+            }
+        });
+    }
+    void updateprequsetion(prequestionUpdateDate data){
+        service.userQuestionUp(data).enqueue(new Callback<org.techtown.findmeapplication.prequestionUpdateResponse>() {
+            @Override
+            public void onResponse(Call<org.techtown.findmeapplication.prequestionUpdateResponse> call, Response<org.techtown.findmeapplication.prequestionUpdateResponse> response) {
+                org.techtown.findmeapplication.prequestionUpdateResponse result = response.body();
+                result.getMessage();
+            }
+
+            @Override
+            public void onFailure(Call<org.techtown.findmeapplication.prequestionUpdateResponse> call, Throwable t) {
+                System.out.println("실패");
             }
         });
     }

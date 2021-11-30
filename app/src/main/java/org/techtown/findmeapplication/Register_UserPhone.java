@@ -15,7 +15,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class Register_UserPhone extends AppCompatActivity {
-    RetrofitApi service = RetrofitClient.getClient().create(RetrofitApi.class);
+    org.techtown.findmeapplication.RetrofitApi service = org.techtown.findmeapplication.RetrofitClient.getClient().create(org.techtown.findmeapplication.RetrofitApi.class);
     public boolean check =false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +55,7 @@ public class Register_UserPhone extends AppCompatActivity {
     void phonecheck(String phone){
         if(phone.length() ==11){
             if(phone.contains("010")){
-                phone(new PhoneData(phone));
+                phone(new org.techtown.findmeapplication.PhoneData(phone));
             }else{
                 Toast.makeText(Register_UserPhone.this, "잘못된 형식을 가진 번호입니다.", Toast.LENGTH_SHORT).show();
             }
@@ -63,11 +63,11 @@ public class Register_UserPhone extends AppCompatActivity {
             Toast.makeText(Register_UserPhone.this, "잘못된 형식을 가진 번호입니다.", Toast.LENGTH_SHORT).show();
         }
     }
-    void phone(PhoneData data){
-        service.userPhone(data).enqueue(new Callback<PhoneResponse>() {
+    void phone(org.techtown.findmeapplication.PhoneData data){
+        service.userPhone(data).enqueue(new Callback<org.techtown.findmeapplication.PhoneResponse>() {
             @Override
-            public void onResponse(Call<PhoneResponse> call, Response<PhoneResponse> response) {
-                PhoneResponse result = response.body();
+            public void onResponse(Call<org.techtown.findmeapplication.PhoneResponse> call, Response<org.techtown.findmeapplication.PhoneResponse> response) {
+                org.techtown.findmeapplication.PhoneResponse result = response.body();
                 Toast.makeText(Register_UserPhone.this, result.getMessage(), Toast.LENGTH_SHORT).show();
             int code = result.getCode();
             if(code ==200){
@@ -76,7 +76,7 @@ public class Register_UserPhone extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<PhoneResponse> call, Throwable t) {
+            public void onFailure(Call<org.techtown.findmeapplication.PhoneResponse> call, Throwable t) {
                 Toast.makeText(Register_UserPhone.this, "회원가입 에러 발생", Toast.LENGTH_SHORT).show();
                 Log.e("회원가입 에러 발생", t.getMessage());
                 t.printStackTrace(); // 에러 발생시 에러 발생 원인 단계별로 출력해줌

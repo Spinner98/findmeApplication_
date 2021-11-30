@@ -9,6 +9,9 @@ public class EmailResponse {
     @SerializedName("message")
     private String message;
 
+    @SerializedName("mail")
+    private String mail;
+
 
     public int getCode() {
         return code;
@@ -17,4 +20,6 @@ public class EmailResponse {
     public String getMessage() {
         return message;
     }
+
+    public String getMail() {return mail;}
 }

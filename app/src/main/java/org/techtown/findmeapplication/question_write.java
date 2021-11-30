@@ -19,7 +19,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class question_write extends AppCompatActivity {
-    RetrofitApi service = RetrofitClient.getClient().create(RetrofitApi.class);
+    org.techtown.findmeapplication.RetrofitApi service = org.techtown.findmeapplication.RetrofitClient.getClient().create(org.techtown.findmeapplication.RetrofitApi.class);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,8 +57,8 @@ public class question_write extends AppCompatActivity {
                     Toast.makeText(question_write.this, "내용을 입력하세요", Toast.LENGTH_SHORT).show();
                 }else{
                     int number = Integer.parseInt(id); //숫자로 변형된 id
-                    RegisterContent_question(new Register_question_Data(number,question,Content,DateText)); //서버에 내용 보내기
-                    updateprequsetion(new prequestionUpdateDate(number));
+                    RegisterContent_question(new org.techtown.findmeapplication.Register_question_Data(number,question,Content,DateText)); //서버에 내용 보내기
+
                 }
 
 
@@ -67,7 +67,7 @@ public class question_write extends AppCompatActivity {
 
 
     }
-    void RegisterContent_question(Register_question_Data data){
+    void RegisterContent_question(org.techtown.findmeapplication.Register_question_Data data){
         service.userRegisterQuestion(data).enqueue(new Callback<Register_question_Response>() {
             @Override
             public void onResponse(Call<Register_question_Response> call, Response<Register_question_Response> response) {
@@ -86,20 +86,7 @@ public class question_write extends AppCompatActivity {
             }
         });
     }
-    void updateprequsetion(prequestionUpdateDate data){
-        service.userQuestionUp(data).enqueue(new Callback<prequestionUpdateResponse>() {
-            @Override
-            public void onResponse(Call<prequestionUpdateResponse> call, Response<prequestionUpdateResponse> response) {
-                prequestionUpdateResponse result = response.body();
-                result.getMessage();
-            }
 
-            @Override
-            public void onFailure(Call<prequestionUpdateResponse> call, Throwable t) {
-                System.out.println("실패");
-            }
-        });
-    }
 
 
 }

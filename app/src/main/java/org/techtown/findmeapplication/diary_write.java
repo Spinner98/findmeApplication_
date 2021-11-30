@@ -19,7 +19,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class diary_write extends AppCompatActivity {
-    RetrofitApi service = RetrofitClient.getClient().create(RetrofitApi.class);
+    org.techtown.findmeapplication.RetrofitApi service = org.techtown.findmeapplication.RetrofitClient.getClient().create(org.techtown.findmeapplication.RetrofitApi.class);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,7 +51,7 @@ public class diary_write extends AppCompatActivity {
                 else{
                     int number = Integer.parseInt(id); //숫자로 변형된 id
                     Intent intent = new Intent(getApplicationContext(),homeActivity.class);
-                    registerDiary(new Insert_Diary_user_Data(number,ContentText,dateText));
+                    registerDiary(new org.techtown.findmeapplication.Insert_Diary_user_Data(number,ContentText,dateText));
                     startActivity(intent);
 
                 }
@@ -59,11 +59,11 @@ public class diary_write extends AppCompatActivity {
         });
 
     }
-    void registerDiary(Insert_Diary_user_Data data){
-        service.userRegisterDairy(data).enqueue(new Callback<insert_Diary_user_Response>() {
+    void registerDiary(org.techtown.findmeapplication.Insert_Diary_user_Data data){
+        service.userRegisterDairy(data).enqueue(new Callback<org.techtown.findmeapplication.insert_Diary_user_Response>() {
             @Override
-            public void onResponse(Call<insert_Diary_user_Response> call, Response<insert_Diary_user_Response> response) {
-                insert_Diary_user_Response result = response.body();
+            public void onResponse(Call<org.techtown.findmeapplication.insert_Diary_user_Response> call, Response<org.techtown.findmeapplication.insert_Diary_user_Response> response) {
+                org.techtown.findmeapplication.insert_Diary_user_Response result = response.body();
                 int Code = result.getCode();
                 if(Code ==200){
                     System.out.println("성공");
@@ -71,7 +71,7 @@ public class diary_write extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<insert_Diary_user_Response> call, Throwable t) {
+            public void onFailure(Call<org.techtown.findmeapplication.insert_Diary_user_Response> call, Throwable t) {
                 System.out.println("실패");
             }
         });

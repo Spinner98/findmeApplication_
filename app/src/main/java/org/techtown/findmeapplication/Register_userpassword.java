@@ -16,7 +16,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class Register_userpassword extends AppCompatActivity {
-    RetrofitApi service = RetrofitClient.getClient().create(RetrofitApi.class);
+    org.techtown.findmeapplication.RetrofitApi service = org.techtown.findmeapplication.RetrofitClient.getClient().create(org.techtown.findmeapplication.RetrofitApi.class);
     public boolean check =false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +41,7 @@ public class Register_userpassword extends AppCompatActivity {
                String pwdcheck = passwordcheck.getText().toString();
                check(pwd,pwdcheck);
                if(check ==true){
-                   Register(new RegisterData(name,phone,email,pwd,questionID));
+                   Register(new org.techtown.findmeapplication.RegisterData(name,phone,email,pwd,questionID));
                }
             }
         });
@@ -54,7 +54,7 @@ public class Register_userpassword extends AppCompatActivity {
             Toast.makeText(Register_userpassword.this, "비밀번호가 같지않습니다", Toast.LENGTH_SHORT).show();
         }
     }
-    void Register(RegisterData data){
+    void Register(org.techtown.findmeapplication.RegisterData data){
         service.userRegister(data).enqueue(new Callback<RegisterResponse>() {
             @Override
             public void onResponse(Call<RegisterResponse> call, Response<RegisterResponse> response) {

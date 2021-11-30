@@ -23,5 +23,12 @@ public interface RetrofitApi {
     Call<questionCheckResponse> userQuestionCheck(@Body questionCheckData data);//버튼 활성화 인서트 판정
     @POST("user/prequestionUp")
     Call<prequestionUpdateResponse> userQuestionUp(@Body prequestionUpdateDate data);
+    @POST("user/findid")
+    Call<FindIdResponse> findId (@Body FindIdData data);
+    @POST("user/changepwd")
+    Call<changePwdResponse> changepwd(@Body org.techtown.findmeapplication.changePwdData data);
+    @POST("user/getdiary")
+    Call<DiaryContentResponse> userdiary (@Body DiaryContentData data);
+
 }
 
