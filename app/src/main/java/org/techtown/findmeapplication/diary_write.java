@@ -19,7 +19,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class diary_write extends AppCompatActivity {
-    org.techtown.findmeapplication.RetrofitApi service = org.techtown.findmeapplication.RetrofitClient.getClient().create(org.techtown.findmeapplication.RetrofitApi.class);
+    RetrofitApi service = RetrofitClient.getClient().create(RetrofitApi.class);
+    public static boolean check=false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +41,7 @@ public class diary_write extends AppCompatActivity {
         String day = dayFormat.format(currentTime);
         Date.setText(year+"년"+month +"월"+day+"일");
 
+
         conform.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,6 +53,7 @@ public class diary_write extends AppCompatActivity {
                 else{
                     int number = Integer.parseInt(id); //숫자로 변형된 id
                     Intent intent = new Intent(getApplicationContext(),homeActivity.class);
+                    check =true;
                     registerDiary(new org.techtown.findmeapplication.Insert_Diary_user_Data(number,ContentText,dateText));
                     startActivity(intent);
 

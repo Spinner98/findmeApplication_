@@ -1,12 +1,14 @@
 package org.techtown.findmeapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
-import android.nfc.Tag;
 import android.os.Bundle;
 import android.util.Log;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -14,34 +16,40 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class DiaryRecycleActivity extends AppCompatActivity {
-    org.techtown.findmeapplication.RetrofitApi service = org.techtown.findmeapplication.RetrofitClient.getClient().create(org.techtown.findmeapplication.RetrofitApi.class);
-
+   RetrofitApi service = RetrofitClient.getClient().create(RetrofitApi.class);
+   DiaryContentResponse userDiary;
+   public ArrayList dateInfo = new ArrayList<>();
+    public ArrayList contentInfo = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_diary_recycle);
-
         Intent intent = getIntent();
         String id = intent.getStringExtra("userid");
-        System.out.println(id);
         int number = Integer.parseInt(id);
-        setDiary(new org.techtown.findmeapplication.DiaryContentData(number));
+        setDiary(new DiaryContentData(number));
 
     }
-    void setDiary(org.techtown.findmeapplication.DiaryContentData data){
-        service.userdiary(data).enqueue(new Callback<org.techtown.findmeapplication.DiaryContentResponse>() {
+    void setDiary(DiaryContentData data){
+        service.userdiary(data).enqueue(new Callback<DiaryContentResponse>() {
             @Override
-            public void onResponse(Call<org.techtown.findmeapplication.DiaryContentResponse> call, Response<org.techtown.findmeapplication.DiaryContentResponse> response) {
-                org.techtown.findmeapplication.DiaryContentResponse result = response.body();
+            public void onResponse(Call<DiaryContentResponse> call, Response<DiaryContentResponse> response) {
+               userDiary = response.body();
+               dateInfo = userDiary.getDiarydate();
+               contentInfo = userDiary.getDiarycontent();
 
-
+                // 리사이클러뷰에 SimpleTextAdapter 객체 지정.
+              diaryReclyeAdapter adapter = new diaryReclyeAdapter(dateInfo,contentInfo) ;
+              RecyclerView recyclerView = findViewById(R.id.recyle_diary) ;
+              recyclerView.setLayoutManager(new LinearLayoutManager(DiaryRecycleActivity.this)) ;
+              recyclerView.setAdapter(adapter) ;
             }
 
             @Override
-            public void onFailure(Call<org.techtown.findmeapplication.DiaryContentResponse> call, Throwable t) {
-
-                Log.d("DiaryRecycleActiviy",t.toString());
+            public void onFailure(Call<DiaryContentResponse> call, Throwable t) {
             }
+
+
         });
     }
 }

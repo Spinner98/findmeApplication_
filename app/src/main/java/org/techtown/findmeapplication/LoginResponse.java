@@ -27,6 +27,9 @@ public class LoginResponse {
     @SerializedName("password")
     private String password;
 
+    @SerializedName("present")
+    private String present;
+
     public int getCode() {
         return code;
     }
@@ -43,4 +46,5 @@ public class LoginResponse {
     public String getQuestionCreate(){return  questionCreate;}
     public String getPassword(){return password;}
     public String getUsermail(){return usermail;}
+    public String getpresent(){return present;}
 }

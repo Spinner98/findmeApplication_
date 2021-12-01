@@ -11,30 +11,22 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
-import com.squareup.picasso.Picasso;
-
-import org.w3c.dom.Text;
-
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Locale;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class diaryFragment extends Fragment {
     public String id;
     public int number;
     public String DateText;
     public String hour;
+    public boolean buttonAction;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.diary_fragment, container, false);
         Button conform = (Button) rootView.findViewById(R.id.question_write);
-        TextView Date = (TextView) rootView.findViewById(R.id.date);
+        TextView Date = (TextView) rootView.findViewById(R.id.diary_date_recycle);
         try {
             Bundle args = getActivity().getIntent().getExtras();
             id = args.getString("id");
@@ -56,13 +48,32 @@ public class diaryFragment extends Fragment {
         Date.setText(year+" 년 "+ month+" 월 "+ day+" 일");
         DateText = year+"년"+month+"월"+day+"일";
 
+        if(homeActivity.diary_check==true){
+            conform.setText("내일봐요");
+            buttonAction =false;
+            if(hour=="00") {
+                buttonAction =true;
+                question_write.check =false;
+                int number = Integer.parseInt(id); //숫자로 변형된 id
+                homeActivity.diary_check =false;
+            }
+
+        }else{
+            conform.setText("작성하러가기");
+            buttonAction =true;
+        }
 
         conform.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(buttonAction ==true){
                     Intent intent = new Intent(getActivity(),diary_write.class);
                     intent.putExtra("id",id);
                     startActivity(intent);
+                }else{
+                    System.out.println("작동중지");
+                }
+
             }
         });
 

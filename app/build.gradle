@@ -64,6 +64,6 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
 ///image load
     implementation 'com.squareup.picasso:picasso:2.71828'
-
+//recycle view
     implementation "androidx.recyclerview:recyclerview:1.1.0"
 }

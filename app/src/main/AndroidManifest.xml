@@ -12,7 +12,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FindmeApplication"
         android:usesCleartextTraffic="true">
-        <service android:name=".MusicService"></service>
+        <activity
+            android:name=".ThemeRecycleActivity"
+            android:exported="false" />
+        <activity
+            android:name=".questionRecycleActivity"
+            android:exported="false" />
+
+        <service android:name=".MusicService" />
+
         <activity
             android:name=".DiaryRecycleActivity"
             android:exported="false" />
@@ -58,7 +66,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
     </application>
 
 </manifest>

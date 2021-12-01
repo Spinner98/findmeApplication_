@@ -18,16 +18,20 @@
         <entry key="..\:/Users/apple/AndroidStudioProjects/findmeApplication/app/src/main/res/layout/activity_findpassword.xml" value="0.3546195652173913" />
         <entry key="..\:/Users/apple/AndroidStudioProjects/findmeApplication/app/src/main/res/layout/activity_home.xml" value="0.33" />
         <entry key="..\:/Users/apple/AndroidStudioProjects/findmeApplication/app/src/main/res/layout/activity_main.xml" value="0.2817028985507246" />
+        <entry key="..\:/Users/apple/AndroidStudioProjects/findmeApplication/app/src/main/res/layout/activity_question_recycle.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/apple/AndroidStudioProjects/findmeApplication/app/src/main/res/layout/activity_question_write.xml" value="0.348731884057971" />
         <entry key="..\:/Users/apple/AndroidStudioProjects/findmeApplication/app/src/main/res/layout/activity_register_user_email.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/apple/AndroidStudioProjects/findmeApplication/app/src/main/res/layout/activity_register_user_name.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/apple/AndroidStudioProjects/findmeApplication/app/src/main/res/layout/activity_register_user_phone.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/apple/AndroidStudioProjects/findmeApplication/app/src/main/res/layout/activity_register_userpassword.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/apple/AndroidStudioProjects/findmeApplication/app/src/main/res/layout/activity_setting.xml" value="0.3546195652173913" />
+        <entry key="..\:/Users/apple/AndroidStudioProjects/findmeApplication/app/src/main/res/layout/activity_theme_recycle.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/apple/AndroidStudioProjects/findmeApplication/app/src/main/res/layout/diary_fragment.xml" value="0.348731884057971" />
         <entry key="..\:/Users/apple/AndroidStudioProjects/findmeApplication/app/src/main/res/layout/fragment_diarywire.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/apple/AndroidStudioProjects/findmeApplication/app/src/main/res/layout/home_toolbar.xml" value="0.35597826086956524" />
         <entry key="..\:/Users/apple/AndroidStudioProjects/findmeApplication/app/src/main/res/layout/item_diary_recyleview.xml" value="0.23333333333333334" />
+        <entry key="..\:/Users/apple/AndroidStudioProjects/findmeApplication/app/src/main/res/layout/item_question_recycleview.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/apple/AndroidStudioProjects/findmeApplication/app/src/main/res/layout/item_theme_recycleview.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/apple/AndroidStudioProjects/findmeApplication/app/src/main/res/layout/question_fragment.xml" value="0.348731884057971" />
         <entry key="..\:/Users/apple/AndroidStudioProjects/findmeApplication/app/src/main/res/layout/toolbar.xml" value="0.348731884057971" />
         <entry key="..\:/Users/apple/AndroidStudioProjects/findmeApplication/app/src/main/res/menu/menu.xml" value="0.36614583333333334" />

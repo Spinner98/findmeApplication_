@@ -2,38 +2,35 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="170dp"
+    android:background="@drawable/backgroundcorner"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="10dp"
+    android:padding="15dp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="170dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/backgroundcorner"
-        android:orientation="vertical"
-        android:padding="10dp">
-
-        <!--이름-->
         <TextView
-            android:id="@+id/date"
+            android:id="@+id/diary_date_recycle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
             android:text="00월00일"
             android:textColor="@color/white"
-            android:textSize="25sp" />
+            android:textSize="15sp" />
 
         <TextView
+            android:id="@+id/diary_content"
             android:layout_width="395dp"
             android:layout_height="match_parent"
             android:text="content"
+            android:layout_marginTop="10dp"
             android:textColor="@color/white"
-            android:textSize="20sp" />
-
-    </LinearLayout>
-    <!--구분선-->
+            android:textSize="13sp" />
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginHorizontal="10dp"
         android:background="#aaa"/>
-</LinearLayout>
+    </LinearLayout>
+    <!--구분선-->
+

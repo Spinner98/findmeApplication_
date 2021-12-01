@@ -2,6 +2,7 @@ package org.techtown.findmeapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
@@ -19,24 +20,25 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class question_write extends AppCompatActivity {
-    org.techtown.findmeapplication.RetrofitApi service = org.techtown.findmeapplication.RetrofitClient.getClient().create(org.techtown.findmeapplication.RetrofitApi.class);
+    org.techtown.findmeapplication.RetrofitApi service = RetrofitClient.getClient().create(RetrofitApi.class);
+    public static boolean check=false;
+    public String id;
+    public String question;
+    public String url;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question_write);
         TextView Date = (TextView) findViewById(R.id.diary_date);
         Button Conform = (Button) findViewById(R.id.conform);
-
-
         Intent intent = getIntent();
-        String question =intent.getStringExtra("question");
-        String id = intent.getStringExtra("id");
-        System.out.println(id);
+        id = intent.getStringExtra("id");
+        question = intent.getStringExtra("question");
+        url = intent.getStringExtra("url");
 
-        EditText Content_text = (EditText) findViewById(R.id.editTextTextMultiLine3);
-        TextView questionText_write = (TextView) findViewById(R.id.question);
-        questionText_write.setText(question);
-
+        TextView questionText = (TextView)findViewById(R.id.question);
+        questionText.setText(question);
+        EditText Content_text = (EditText)findViewById(R.id.editTextTextMultiLine3);
         java.util.Date currentTime = Calendar.getInstance().getTime();
         SimpleDateFormat yearFormat = new SimpleDateFormat("yyyy", Locale.getDefault());
         SimpleDateFormat dayFormat = new SimpleDateFormat("dd", Locale.getDefault());
@@ -57,8 +59,9 @@ public class question_write extends AppCompatActivity {
                     Toast.makeText(question_write.this, "내용을 입력하세요", Toast.LENGTH_SHORT).show();
                 }else{
                     int number = Integer.parseInt(id); //숫자로 변형된 id
-                    RegisterContent_question(new org.techtown.findmeapplication.Register_question_Data(number,question,Content,DateText)); //서버에 내용 보내기
-
+                    check =true;
+                    RegisterContent_question(new Register_question_Data(number,question,Content,DateText)); //서버에 내용 보내기
+                    updateprequsetion(new prequestionUpdateDate(number));
                 }
 
 
@@ -75,7 +78,9 @@ public class question_write extends AppCompatActivity {
                 int questioncheckcode = result.getCode();
                 if(questioncheckcode == 500){
                     System.out.println("성공");
+                    check =true;
                     Intent intent = new Intent(getApplicationContext(),homeActivity.class);
+                    intent.putExtra("url",url);
                     startActivity(intent);
                 }
             }
@@ -86,7 +91,21 @@ public class question_write extends AppCompatActivity {
             }
         });
     }
+    void updateprequsetion(prequestionUpdateDate data){
+        service.userQuestionUp(data).enqueue(new Callback<prequestionUpdateResponse>() {
+            @Override
+            public void onResponse(Call<prequestionUpdateResponse> call, Response<prequestionUpdateResponse> response) {
 
+                prequestionUpdateResponse result = response.body();
+                result.getMessage();
+            }
+
+            @Override
+            public void onFailure(Call<prequestionUpdateResponse> call, Throwable t) {
+                System.out.println("실패");
+            }
+        });
+    }
 
 
 }

@@ -29,6 +29,10 @@ public interface RetrofitApi {
     Call<changePwdResponse> changepwd(@Body org.techtown.findmeapplication.changePwdData data);
     @POST("user/getdiary")
     Call<DiaryContentResponse> userdiary (@Body DiaryContentData data);
+    @POST("user/getquestion")
+    Call<QuestionContentResponse> userQuestion(@Body QuestionContentData data);
+    @POST("user/getTheme")
+    Call<ThemeContentResponse> userTheme(@Body ThemeContentData data);
 
 }
 

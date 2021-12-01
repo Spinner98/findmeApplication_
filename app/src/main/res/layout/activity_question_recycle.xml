@@ -4,11 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DiaryRecycleActivity">
-
+    tools:context=".questionRecycleActivity">
     <androidx.recyclerview.widget.RecyclerView
         android:layout_marginTop="10dp"
-        android:id="@+id/recyle_diary"
+        android:id="@+id/recyle_question"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
